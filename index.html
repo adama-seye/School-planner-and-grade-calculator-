@@ -8,11 +8,24 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <h1>School Planner & Grade Calculator</h1>
-  <p>This app helps students track exams and calculate grades.</p>
+  <p>This app helps students track exams and calculate weighted averages.</p>
 
-  <!-- Link to JavaScript -->
+  <h2>Grade Calculator</h2>
+  <div id="grade-calculator">
+    <label>Subject 1: <input type="number" id="grade1" placeholder="Enter grade"></label>
+    <label>Coefficient: <input type="number" id="coef1" placeholder="Enter coefficient"></label><br><br>
+
+    <label>Subject 2: <input type="number" id="grade2" placeholder="Enter grade"></label>
+    <label>Coefficient: <input type="number" id="coef2" placeholder="Enter coefficient"></label><br><br>
+
+    <label>Subject 3: <input type="number" id="grade3" placeholder="Enter grade"></label>
+    <label>Coefficient: <input type="number" id="coef3" placeholder="Enter coefficient"></label><br><br>
+
+    <button id="calculate">Calculate Weighted Average</button>
+    <p id="result"></p>
+  </div>
+
   <script src="script.js"></script>
 </body>
-</html>
+<htlm> 
