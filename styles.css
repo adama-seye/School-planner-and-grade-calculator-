@@ -1,3 +1,74 @@
+/* Base page styling */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f8; /* light neutral background */
+  color: #2e3a45;      /* deep, soft text */
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* The main container */
+#grade-calculator {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Headings */
+h1, h2 {
+  text-align: center;
+  color: #107C41;  /* soft Pronote‑green accent */
+  margin-bottom: 12px;
+}
+
+/* Labels and inputs */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #2e3a45;
+}
+
+input[type="number"] {
+  width: 90px;
+  padding: 6px 10px;
+  margin-right: 8px;
+  border: 1.5px solid #ced4da;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input[type="number"]:focus {
+  border-color: #107C41;
+}
+
+/* Buttons */
+button {
+  background: #107C41; /* Pronote‑green */
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #0e6d38; /* slightly darker on hover */
+}
+
+/* Result text */
+#result {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #107C41;
 }
