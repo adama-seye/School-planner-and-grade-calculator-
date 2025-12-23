@@ -1,4 +1,4 @@
-// Select the button and result paragraph
+// Select button and result paragraph
 const button = document.getElementById("calculate");
 const result = document.getElementById("result");
 
@@ -21,4 +21,3 @@ button.addEventListener("click", function() {
   // Display result
   result.textContent = "Weighted Average: " + average.toFixed(2);
 });
-
