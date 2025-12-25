@@ -1,74 +1,81 @@
-/* Base page styling */
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f6f8; /* light neutral background */
-  color: #2e3a45;      /* deep, soft text */
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
+  background-color: #f4f7f5;
+  margin: 0;
+  padding: 0;
+  color: #1f2933;
 }
 
-/* The main container */
-#grade-calculator {
-  background: #ffffff;
-  padding: 30px 40px;
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  width: 100%;
-  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* Headings */
-h1, h2 {
-  text-align: center;
-  color: #107C41;  /* soft Pronote‑green accent */
-  margin-bottom: 12px;
+h1 {
+  color: #1e7f4f;
+  margin-bottom: 5px;
 }
 
-/* Labels and inputs */
+h2 {
+  color: #145c39;
+  margin-top: 30px;
+}
+
+p {
+  color: #4b5563;
+}
+
+.grade-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
 label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #2e3a45;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
 }
 
-input[type="number"] {
-  width: 90px;
-  padding: 6px 10px;
-  margin-right: 8px;
-  border: 1.5px solid #ced4da;
+input {
+  padding: 10px;
   border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+input:focus {
   outline: none;
-  transition: border-color 0.2s ease;
+  border-color: #1e7f4f;
 }
 
-input[type="number"]:focus {
-  border-color: #107C41;
-}
-
-/* Buttons */
 button {
-  background: #107C41; /* Pronote‑green */
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #1e7f4f;
   color: white;
   border: none;
-  padding: 10px 18px;
   border-radius: 10px;
-  font-size: 1em;
+  font-size: 15px;
   cursor: pointer;
-  margin-top: 12px;
-  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background: #0e6d38; /* slightly darker on hover */
+  background-color: #166644;
 }
 
-/* Result text */
 #result {
-  text-align: center;
-  margin-top: 18px;
-  font-size: 1.2em;
+  margin-top: 20px;
   font-weight: bold;
-  color: #107C41;
+  font-size: 16px;
+  color: #1e7f4f;
 }
