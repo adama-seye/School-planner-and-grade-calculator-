@@ -1,23 +1,53 @@
-// Select button and result paragraph
-const button = document.getElementById("calculate");
+const subjectsDiv = document.getElementById("subjects");
+const addSubjectBtn = document.getElementById("add-subject");
+const calculateBtn = document.getElementById("calculate");
 const result = document.getElementById("result");
 
-button.addEventListener("click", function() {
-  // Get grades
-  const grade1 = parseFloat(document.getElementById("grade1").value) || 0;
-  const grade2 = parseFloat(document.getElementById("grade2").value) || 0;
-  const grade3 = parseFloat(document.getElementById("grade3").value) || 0;
+let subjectCount = 0;
 
-  // Get coefficients
-  const coef1 = parseFloat(document.getElementById("coef1").value) || 1;
-  const coef2 = parseFloat(document.getElementById("coef2").value) || 1;
-  const coef3 = parseFloat(document.getElementById("coef3").value) || 1;
+addSubjectBtn.addEventListener("click", () => {
+  subjectCount++;
 
-  // Calculate weighted average
-  const weightedSum = grade1 * coef1 + grade2 * coef2 + grade3 * coef3;
-  const totalCoef = coef1 + coef2 + coef3;
-  const average = weightedSum / totalCoef;
+  const row = document.createElement("div");
+  row.className = "grade-row";
 
-  // Display result
-  result.textContent = "Weighted Average: " + average.toFixed(2);
+  row.innerHTML = `
+    <label>
+      Subject ${subjectCount} grade
+      <input type="number" class="grade" placeholder="Grade">
+    </label>
+
+    <label>
+      Coefficient
+      <input type="number" class="coef" placeholder="Coef">
+    </label>
+  `;
+
+  subjectsDiv.appendChild(row);
+});
+
+calculateBtn.addEventListener("click", () => {
+  const grades = document.querySelectorAll(".grade");
+  const coefs = document.querySelectorAll(".coef");
+
+  let total = 0;
+  let coefSum = 0;
+
+  grades.forEach((gradeInput, index) => {
+    const grade = Number(gradeInput.value);
+    const coef = Number(coefs[index].value);
+
+    if (!isNaN(grade) && !isNaN(coef)) {
+      total += grade * coef;
+      coefSum += coef;
+    }
+  });
+
+  if (coefSum === 0) {
+    result.textContent = "Please enter at least one subject.";
+    return;
+  }
+
+  const average = (total / coefSum).toFixed(2);
+  result.textContent = `Weighted Average: ${average}`;
 });
