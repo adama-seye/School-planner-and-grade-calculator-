@@ -73,7 +73,11 @@ calculateBtn.addEventListener("click", () => {
 
   const termAverage = termTotal / termCoefSum;
 
-  termsData[currentTerm].average = termAverage;
+  termsData = {
+  1: { subjects: [], average: null },
+  2: { subjects: [], average: null },
+  3: { subjects: [], average: null }
+};
 
   let globalTotal = 0;
   let countedTerms = 0;
