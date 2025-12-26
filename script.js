@@ -1,3 +1,5 @@
+const prevTermBtn = document.getElementById("prev-term");
+const nextTermBtn = document.getElementById("next-term");
 const subjectsDiv = document.getElementById("subjects");
 const addSubjectBtn = document.getElementById("add-subject");
 const calculateBtn = document.getElementById("calculate");
@@ -97,5 +99,25 @@ termTypeSelect.addEventListener("change", () => {
   updateTermTitle();
   renderSubjects();
 });
+
+prevTermBtn.addEventListener("click", () => {
+  if (currentTerm > 1) {
+    currentTerm--;
+    updateTermTitle();
+    renderSubjects();
+    result.textContent = "";
+  }
+});
+
+nextTermBtn.addEventListener("click", () => {
+  const maxTerms = termTypeSelect.value === "semester" ? 2 : 3;
+  if (currentTerm < maxTerms) {
+    currentTerm++;
+    updateTermTitle();
+    renderSubjects();
+    result.textContent = "";
+  }
+});
+
 
 updateTermTitle();
