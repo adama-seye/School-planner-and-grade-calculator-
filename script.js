@@ -2,6 +2,8 @@ const subjectsDiv = document.getElementById("subjects");
 const addSubjectBtn = document.getElementById("add-subject");
 const calculateBtn = document.getElementById("calculate");
 const result = document.getElementById("result");
+const scaleSelect = document.getElementById("scale");
+
 
 let subjectCount = 0;
 
@@ -38,8 +40,12 @@ calculateBtn.addEventListener("click", () => {
     const coef = Number(coefs[index].value);
 
     if (!isNaN(grade) && !isNaN(coef)) {
-      total += grade * coef;
-      coefSum += coef;
+     const scale = Number(scaleSelect.value);
+     const normalizedGrade = (grade / scale) * 20;
+
+     total += normalizedGrade * coef;
+     coefSum += coef;
+
     }
   });
 
