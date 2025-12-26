@@ -13,9 +13,18 @@
     </div>
 
     <h1>School Planner & Grade Calculator</h1>
-    <p>This app helps students track exams and calculate weighted averages.</p>
-    <h2>Grading Scale</h2>
+    <p>This app helps students track exams and calculate weighted averages.</p> 
+    
+    <h2>Academic System</h2>
 
+<select id="term-type">
+  <option value="semester">Semester (2 terms)</option>
+  <option value="trimester">Trimester (3 terms)</option>
+</select>
+
+<h2 id="current-term-title">Term 1</h2>
+
+<h2>Grading Scale</h2>
 <select id="scale">
   <option value="20">Out of 20</option>
   <option value="50">Out of 50</option>
@@ -26,15 +35,11 @@
 
    <div id="subjects"></div>
 
-<button id="add-subject">➕ Add subject</button>
+   <button id="add-subject">➕ Add subject</button>
+   <button id="calculate">Calculate Weighted Average</button>
 
-<button id="calculate">Calculate Weighted Average</button>
-<p id="result"></p>
-
-
-    <button id="calculate">Calculate Weighted Average</button>
-    <p id="result"></p>
-  </div>
+  <p id="result"></p>
+</div>
 
   <script src="script.js"></script>
 </body>
