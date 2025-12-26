@@ -3,57 +3,99 @@ const addSubjectBtn = document.getElementById("add-subject");
 const calculateBtn = document.getElementById("calculate");
 const result = document.getElementById("result");
 const scaleSelect = document.getElementById("scale");
+const termTypeSelect = document.getElementById("term-type");
+const termTitle = document.getElementById("current-term-title");
 
+let currentTerm = 1;
+let termsData = {
+  1: [],
+  2: [],
+  3: []
+};
 
-let subjectCount = 0;
+function updateTermTitle() {
+  termTitle.textContent = `Term ${currentTerm}`;
+}
+
+function renderSubjects() {
+  subjectsDiv.innerHTML = "";
+
+  termsData[currentTerm].forEach((_, index) => {
+    const row = document.createElement("div");
+    row.className = "grade-row";
+
+    row.innerHTML = `
+      <label>
+        Subject grade
+        <input type="number" class="grade" data-index="${index}">
+      </label>
+
+      <label>
+        Coefficient
+        <input type="number" class="coef" data-index="${index}">
+      </label>
+    `;
+
+    subjectsDiv.appendChild(row);
+  });
+}
 
 addSubjectBtn.addEventListener("click", () => {
-  subjectCount++;
-
-  const row = document.createElement("div");
-  row.className = "grade-row";
-
-  row.innerHTML = `
-    <label>
-      Subject ${subjectCount} grade
-      <input type="number" class="grade" placeholder="Grade">
-    </label>
-
-    <label>
-      Coefficient
-      <input type="number" class="coef" placeholder="Coef">
-    </label>
-  `;
-
-  subjectsDiv.appendChild(row);
+  termsData[currentTerm].push({ grade: 0, coef: 0 });
+  renderSubjects();
 });
 
 calculateBtn.addEventListener("click", () => {
   const grades = document.querySelectorAll(".grade");
   const coefs = document.querySelectorAll(".coef");
+  const scale = Number(scaleSelect.value);
 
-  let total = 0;
-  let coefSum = 0;
+  let termTotal = 0;
+  let termCoefSum = 0;
 
-  grades.forEach((gradeInput, index) => {
-    const grade = Number(gradeInput.value);
-    const coef = Number(coefs[index].value);
+  grades.forEach((g, i) => {
+    const grade = Number(g.value);
+    const coef = Number(coefs[i].value);
 
     if (!isNaN(grade) && !isNaN(coef)) {
-     const scale = Number(scaleSelect.value);
-     const normalizedGrade = (grade / scale) * 20;
-
-     total += normalizedGrade * coef;
-     coefSum += coef;
-
+      const normalized = (grade / scale) * 20;
+      termTotal += normalized * coef;
+      termCoefSum += coef;
     }
   });
 
-  if (coefSum === 0) {
-    result.textContent = "Please enter at least one subject.";
+  if (termCoefSum === 0) {
+    result.textContent = "Please add subjects with grades.";
     return;
   }
 
-  const average = (total / coefSum).toFixed(2);
-  result.textContent = `Weighted Average: ${average}`;
+  const termAverage = termTotal / termCoefSum;
+
+  termsData[currentTerm].average = termAverage;
+
+  let globalTotal = 0;
+  let countedTerms = 0;
+
+  const maxTerms = termTypeSelect.value === "semester" ? 2 : 3;
+
+  for (let i = 1; i <= maxTerms; i++) {
+    if (termsData[i].average) {
+      globalTotal += termsData[i].average;
+      countedTerms++;
+    }
+  }
+
+  const globalAverage = (globalTotal / countedTerms).toFixed(2);
+
+  result.textContent =
+    `Term ${currentTerm} average: ${termAverage.toFixed(2)} / 20 | Global average: ${globalAverage} / 20`;
 });
+
+termTypeSelect.addEventListener("change", () => {
+  currentTerm = 1;
+  termsData = { 1: [], 2: [], 3: [] };
+  updateTermTitle();
+  renderSubjects();
+});
+
+updateTermTitle();
