@@ -66,58 +66,6 @@
 
   <script src="script.js"></script>
 
-  <script>
-let currentTerm = 1;
-let maxTerms = 2;
-
-const termType = document.getElementById("term-type");
-const title = document.getElementById("current-term-title");
-
-termType.addEventListener("change", () => {
-  maxTerms = termType.value === "semester" ? 2 : 3;
-  currentTerm = 1;
-  title.innerText = "Term " + currentTerm;
-});
-
-document.getElementById("next-btn").addEventListener("click", () => {
-  if (currentTerm < maxTerms) {
-    currentTerm++;
-    title.innerText = "Term " + currentTerm;
-  }
-});
-
-document.getElementById("prev-btn").addEventListener("click", () => {
-  if (currentTerm > 1) {
-    currentTerm--;
-    title.innerText = "Term " + currentTerm;
-  }
-});
-
-  <script>
-  console.log("JS LOADED");
-
-  const home = document.getElementById("home");
-  const calculator = document.getElementById("calculator");
-  const planner = document.getElementById("planner");
-
-  document.getElementById("go-calculator").onclick = () => {
-    home.classList.add("hidden");
-    calculator.classList.remove("hidden");
-  };
-
-  document.getElementById("go-planner").onclick = () => {
-    home.classList.add("hidden");
-    planner.classList.remove("hidden");
-  };
-
-  document.querySelectorAll(".back-btn").forEach(btn => {
-    btn.onclick = () => {
-      calculator.classList.add("hidden");
-      planner.classList.add("hidden");
-      home.classList.remove("hidden");
-    };
-  });
-</script>
 </body>
 </html>
 
