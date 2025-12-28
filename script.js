@@ -126,30 +126,6 @@ nextTermBtn.addEventListener("click", () => {
 
 updateTermTitle();
 
-const home = document.getElementById("home-screen");
-const calculator = document.getElementById("calculator-screen");
-const planner = document.getElementById("planner-screen");
-
-document.getElementById("go-calculator").onclick = () => {
-  home.classList.add("hidden");
-  calculator.classList.remove("hidden");
-};
-
-document.getElementById("go-planner").onclick = () => {
-  home.classList.add("hidden");
-  planner.classList.remove("hidden");
-};
-
-document.querySelectorAll(".back").forEach(btn => {
-  btn.onclick = () => {
-    calculator.classList.add("hidden");
-    planner.classList.add("hidden");
-    home.classList.remove("hidden");
-  };
-});
-
-console.log("JS LOADED");
-
 const home = document.getElementById("home");
 const calculator = document.getElementById("calculator");
 const planner = document.getElementById("planner");
