@@ -92,3 +92,8 @@ button:hover {
   font-weight: 600;
   color: #1f7a4d;
 }
+
+.hidden {
+  display: none;
+}
+
