@@ -148,6 +148,7 @@ document.querySelectorAll(".back").forEach(btn => {
   };
 });
 
+console.log("JS LOADED");
 
 const home = document.getElementById("home");
 const calculator = document.getElementById("calculator");
