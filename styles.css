@@ -136,3 +136,33 @@ button {
 button:hover {
   background: #4a6cf7;
 }
+
+.hidden {
+  display: none;
+}
+
+.main-btn {
+  width: 100%;
+  padding: 16px;
+  margin: 12px 0;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  background: #1f8f55;
+  color: white;
+  cursor: pointer;
+}
+
+.main-btn:hover {
+  background: #176b40;
+}
+
+.back-btn {
+  margin-bottom: 20px;
+  background: none;
+  border: none;
+  color: #1f8f55;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
