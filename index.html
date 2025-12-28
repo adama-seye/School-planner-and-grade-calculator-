@@ -92,10 +92,33 @@ document.getElementById("prev-btn").addEventListener("click", () => {
     title.innerText = "Term " + currentTerm;
   }
 });
+
+  <script>
+  console.log("JS LOADED");
+
+  const home = document.getElementById("home");
+  const calculator = document.getElementById("calculator");
+  const planner = document.getElementById("planner");
+
+  document.getElementById("go-calculator").onclick = () => {
+    home.classList.add("hidden");
+    calculator.classList.remove("hidden");
+  };
+
+  document.getElementById("go-planner").onclick = () => {
+    home.classList.add("hidden");
+    planner.classList.remove("hidden");
+  };
+
+  document.querySelectorAll(".back-btn").forEach(btn => {
+    btn.onclick = () => {
+      calculator.classList.add("hidden");
+      planner.classList.add("hidden");
+      home.classList.remove("hidden");
+    };
+  });
 </script>
-
 </body>
-
 </html>
 
 
