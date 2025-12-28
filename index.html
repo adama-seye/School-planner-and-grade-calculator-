@@ -6,21 +6,39 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>  
-  <div class="container">
+<div class="container">
 
-  <h1>School Planner & Grade Calculator</h1>
-  <p>This app helps students track exams and calculate weighted averages.</p>
+  <!-- HOME -->
+  <section id="home">
+    <h1>School Planner</h1>
+    <p>Choose what you want to work on</p>
 
-  <h2>Academic System</h2>
-  <select id="term-type">
-    <option value="semester">Semester (2 terms)</option>
-    <option value="trimester">Trimester (3 terms)</option>
-  </select>
+    <button id="go-calculator" class="main-btn">
+      Grade Calculator
+    </button>
 
-  <h2 id="current-term-title">Term 1</h2> 
+    <button id="go-planner" class="main-btn">
+      Planner
+    </button>
+  </section>
 
-    <button id="prev-btn">Previous Term</button>
-    <button id="next-btn">Next Term</button>                            
+  <!-- GRADE CALCULATOR -->
+  <section id="calculator" class="hidden">
+    <h2>Grade Calculator</h2>
+
+    <button class="back-btn">← Back</button>
+
+    <!-- your calculator content stays here -->
+  </section>
+
+  <!-- PLANNER -->
+  <section id="planner" class="hidden">
+    <h2>Planner</h2>
+
+    <button class="back-btn">← Back</button>
+
+    <p>Planner coming next</p>
+  </section>
 
 </div>
 
