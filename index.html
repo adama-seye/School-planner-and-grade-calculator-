@@ -7,34 +7,37 @@
 </head>
 <body>  
   <div class="container">
+<!-- HOME SCREEN -->
+<div id="home-screen">
+  <h1>School Planner</h1>
+  <p>Organize your grades and your school life.</p>
 
+  <div class="home-buttons">
+    <button id="go-calculator">📊 Grade Calculator</button>
+    <button id="go-planner">🗓️ Planner</button>
+  </div>
+</div>
 
-    <h1>School Planner & Grade Calculator</h1>
-    <p>This app helps students track exams and calculate weighted averages.</p>
+<!-- GRADE CALCULATOR SCREEN -->
+<div id="calculator-screen" class="hidden">
+  <button class="back">← Back</button>
 
-    <h2>Academic System</h2>
-    <select id="term-type">
-      <option value="semester">Semester (2 terms)</option>
-      <option value="trimester">Trimester (3 terms)</option>
-    </select>
+  <h2>Grade Calculator</h2>
 
-    <h2 id="current-term-title">Term 1</h2>
+  <!-- everything you ALREADY BUILT for grades stays here -->
+  <!-- academic system, scale, subjects, calculate button, result -->
+</div>
 
-    <h2>Grading Scale</h2>
-    <select id="scale">
-      <option value="20">Out of 20</option>
-      <option value="50">Out of 50</option>
-      <option value="100">Out of 100</option>
-    </select>
+<!-- PLANNER SCREEN -->
+<div id="planner-screen" class="hidden">
+  <button class="back">← Back</button>
 
-    <h2>Grade Calculator</h2>
+  <h2>Planner</h2>
+  <p>Track exams, homework, and revisions.</p>
 
-    <div id="subjects"></div>
+  <!-- planner content will go here next -->
+</div>
 
-    <button id="add-subject">➕ Add subject</button>
-    <button id="calculate">Calculate Weighted Average</button>
-
-    <p id="result"></p>
   </div>
 
   <script src="script.js"></script>
