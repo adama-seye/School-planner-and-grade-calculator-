@@ -22,20 +22,40 @@
       </button>
     </section>
 
-    <!-- GRADE CALCULATOR -->
-    <section id="calculator" class="hidden">
-      <button class="back-btn">← Back</button>
-      <h2>Grade Calculator</h2>
+      <section id="calculator" class="hidden">
+  <button class="back-btn">← Back</button>
 
-      <!-- PUT your calculator content HERE -->
-    </section>
+  <h2>Grade Calculator</h2>
 
-    <!-- PLANNER -->
-    <section id="planner" class="hidden">
-      <button class="back-btn">← Back</button>
-      <h2>Planner</h2>
-      <p>Planner coming next</p>
-    </section>
+  <h3>Academic System</h3>
+  <select id="term-type">
+    <option value="semester">Semester</option>
+    <option value="trimester">Trimester</option>
+  </select>
+
+  <h3>Grading Scale</h3>
+  <select id="scale">
+    <option value="20">Out of 20</option>
+    <option value="50">Out of 50</option>
+    <option value="100">Out of 100</option>
+  </select>
+
+  <div id="subjects"></div>
+
+  <button id="add-subject">➕ Add subject</button>
+  <button id="calculate">Calculate Weighted Average</button>
+
+  <p id="result"></p>
+</section>
+
+   <section id="planner" class="hidden">
+  <button class="back-btn">← Back</button>
+
+  <h2>Planner</h2>
+  <p>Track exams, homework, and revisions.</p>
+
+  <p class="muted">Planner features coming next.</p>
+</section>
 
   </div>
 
