@@ -1,56 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>School Planner</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Academic Tracker</title>
+
+<style>
+:root {
+  --green:#0f7a4a;
+  --bg:#f4f7f6;
+}
+
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+}
+
+header {
+  background:white;
+  padding:15px;
+  border-bottom:1px solid #ddd;
+}
+
+nav button {
+  background:none;
+  border:none;
+  color:var(--green);
+  font-size:16px;
+  cursor:pointer;
+  padding:6px 10px;
+}
+
+section {
+  display:none;
+  padding:20px;
+}
+section.active { display:block; }
+
+h2 { color:var(--green); }
+
+.subject {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+input, select {
+  padding:6px;
+}
+
+.action {
+  background:var(--green);
+  color:white;
+  border:none;
+  padding:8px 12px;
+  cursor:pointer;
+}
+.action:hover { background:#095c38; }
+
+.calendar {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+.day {
+  background:white;
+  border:1px solid #ddd;
+  padding:8px;
+  min-height:70px;
+}
+.event {
+  background:var(--green);
+  color:white;
+  font-size:12px;
+  margin-top:4px;
+  padding:2px 4px;
+}
+
+@media print {
+  nav, button { display:none; }
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
+<header>
+<nav>
+  <button onclick="show('calc')">📊 Grade Calculator</button>
+  <button onclick="show('planner')">📅 Planner</button>
+</nav>
+</header>
 
-  <!-- HOME -->
-  <section id="home">
-    <h1>School Planner</h1>
-    <p>Organize your grades and your school life.</p>
+<!-- ================= CALCULATOR ================= -->
+<section id="calc" class="active">
+<h2>📊 Grade Calculator</h2>
 
-    <div class="home-buttons">
-      <button id="go-calculator">📊 Grade Calculator</button>
-      <button id="go-planner">📅 Planner</button>
-    </div>
-  </section>
+<select id="term">
+  <option>Semester</option>
+  <option>Trimester</option>
+</select>
 
-  <!-- GRADE CALCULATOR -->
-  <section id="calculator" class="hidden">
-    <button class="back-btn">← Back</button>
-    <h2>Grade Calculator</h2>
+<div id="subjects"></div>
 
-    <div id="subjects"></div>
+<button class="action" onclick="addSubject()">➕ Add Subject</button>
+<button class="action" onclick="calculate()">🧮 Calculate</button>
+<button class="action" onclick="exportPDF()">🖨️ Export PDF</button>
 
-    <div class="calc-actions">
-      <button id="add-subject">➕ Add subject</button>
-      <button id="calculate">Calculate Weighted Average</button>
-    </div>
+<h3 id="avg"></h3>
 
-    <p id="result"></p>
-  </section>
+<canvas id="graph" height="120"></canvas>
+</section>
 
-  <!-- PLANNER -->
-  <section id="planner" class="hidden">
-    <button class="back-btn">← Back</button>
-    <h2>Planner</h2>
+<!-- ================= PLANNER ================= -->
+<section id="planner">
+<h2>📅 Planner</h2>
 
-    <div class="planner-controls">
-      <button id="prev-month">←</button>
-      <span id="month-title"></span>
-      <button id="next-month">→</button>
-    </div>
+<select id="view" onchange="renderCalendar()">
+  <option value="month">Month</option>
+  <option value="week">Week</option>
+</select>
 
-    <div id="calendar"></div>
-  </section>
+<input type="month" id="monthPick" onchange="renderCalendar()">
 
-</div>
+<div class="calendar" id="calendar"></div>
 
-<script src="script.js"></script>
+<h3>Add Evaluation</h3>
+<input type="date" id="eventDate">
+<input placeholder="Exam / Test" id="eventText">
+<button class="action" onclick="addEvent()">Save</button>
+</section>
+
+<script>
+/* ---------- NAV ---------- */
+function show(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* ---------- GRADES ---------- */
+const subjectsDiv=document.getElementById("subjects");
+const history=JSON.parse(localStorage.getItem("history")||"[]");
+
+function addSubject(n="",g="",c="",col="#0f7a4a"){
+  const d=document.createElement("div");
+  d.className="subject";
+  d.innerHTML=`
+    <input placeholder="Subject" value="${n}">
+    <input type="number" placeholder="Grade" value="${g}">
+    <input type="number" placeholder="Coef" value="${c}">
+    <input type="color" value="${col}">
+  `;
+  subjectsDiv.appendChild(d);
+}
+
+function calculate(){
+  let t=0,cs=0,colors=[];
+  document.querySelectorAll(".subject").forEach(s=>{
+    const i=s.querySelectorAll("input");
+    const g=parseFloat(i[1].value);
+    const c=parseFloat(i[2].value);
+    if(!isNaN(g)&&!isNaN(c)){
+      t+=g*c; cs+=c; colors.push(i[3].value);
+    }
+  });
+  const avg=cs?(t/cs).toFixed(2):0;
+  document.getElementById("avg").textContent="Average: "+avg;
+  history.push(avg);
+  localStorage.setItem("history",JSON.stringify(history));
+  drawGraph();
+}
+
+function drawGraph(){
+  const cv=document.getElementById("graph");
+  const ctx=cv.getContext("2d");
+  ctx.clearRect(0,0,cv.width,cv.height);
+  ctx.beginPath();
+  history.forEach((v,i)=>{
+    const x=i*(cv.width/(history.length-1||1));
+    const y=cv.height-(v/20)*cv.height;
+    i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+  });
+  ctx.strokeStyle="#0f7a4a";
+  ctx.stroke();
+}
+
+function exportPDF(){ window.print(); }
+
+/* ---------- PLANNER ---------- */
+const events=JSON.parse(localStorage.getItem("events")||"{}");
+
+function renderCalendar(){
+  const cal=document.getElementById("calendar");
+  cal.innerHTML="";
+  const view=document.getElementById("view").value;
+  const base=new Date(document.getElementById("monthPick").value||new Date());
+  let days=view==="week"?7:new Date(base.getFullYear(),base.getMonth()+1,0).getDate();
+
+  for(let i=1;i<=days;i++){
+    const d=new Date(base.getFullYear(),base.getMonth(),i);
+    const k=d.toISOString().split("T")[0];
+    const div=document.createElement("div");
+    div.className="day";
+    div.innerHTML=`<strong>${d.getDate()}</strong>`;
+    (events[k]||[]).forEach(e=>{
+      const ev=document.createElement("div");
+      ev.className="event"; ev.textContent=e;
+      div.appendChild(ev);
+    });
+    cal.appendChild(div);
+  }
+}
+
+function addEvent(){
+  const d=document.getElementById("eventDate").value;
+  const t=document.getElementById("eventText").value;
+  if(!d||!t)return;
+  events[d]=events[d]||[];
+  events[d].push(t);
+  localStorage.setItem("events",JSON.stringify(events));
+  renderCalendar();
+}
+
+drawGraph();
+renderCalendar();
+</script>
+
 </body>
 </html>
