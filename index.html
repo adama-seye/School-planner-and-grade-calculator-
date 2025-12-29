@@ -2,66 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>School Planner & Grade Calculator</title>
+  <title>School Planner</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
 
-    <!-- HOME -->
-    <section id="home">
-      <h1>School Planner</h1>
-      <p>Choose what you want to work on</p>
+<div class="container">
 
-      <button id="go-calculator" class="main-btn">
-        📊 Grade Calculator
-      </button>
+  <!-- HOME -->
+  <section id="home">
+    <h1>School Planner</h1>
+    <p>Organize your grades and your school life.</p>
 
-      <button id="go-planner" class="main-btn">
-        📆 Planner
-      </button>
-    </section>
+    <div class="home-buttons">
+      <button id="go-calculator">📊 Grade Calculator</button>
+      <button id="go-planner">📅 Planner</button>
+    </div>
+  </section>
 
-      <section id="calculator" class="hidden">
-  <button class="back-btn">← Back</button>
+  <!-- GRADE CALCULATOR -->
+  <section id="calculator" class="hidden">
+    <button class="back-btn">← Back</button>
+    <h2>Grade Calculator</h2>
 
-  <h2>Grade Calculator</h2>
+    <div id="subjects"></div>
 
-  <h3>Academic System</h3>
-  <select id="term-type">
-    <option value="semester">Semester</option>
-    <option value="trimester">Trimester</option>
-  </select>
+    <div class="calc-actions">
+      <button id="add-subject">➕ Add subject</button>
+      <button id="calculate">Calculate Weighted Average</button>
+    </div>
 
-  <h3>Grading Scale</h3>
-  <select id="scale">
-    <option value="20">Out of 20</option>
-    <option value="50">Out of 50</option>
-    <option value="100">Out of 100</option>
-  </select>
+    <p id="result"></p>
+  </section>
 
-  <div id="subjects"></div>
+  <!-- PLANNER -->
+  <section id="planner" class="hidden">
+    <button class="back-btn">← Back</button>
+    <h2>Planner</h2>
 
-  <button id="add-subject">➕ Add subject</button>
-  <button id="calculate">Calculate Weighted Average</button>
+    <div class="planner-controls">
+      <button id="prev-month">←</button>
+      <span id="month-title"></span>
+      <button id="next-month">→</button>
+    </div>
 
-  <p id="result"></p>
-</section>
+    <div id="calendar"></div>
+  </section>
 
-   <section id="planner" class="hidden">
-  <button class="back-btn">← Back</button>
+</div>
 
-  <h2>Planner</h2>
-  <p>Track exams, homework, and revisions.</p>
-
-  <p class="muted">Planner features coming next.</p>
-</section>
-
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
-  
 </html>
-
-
